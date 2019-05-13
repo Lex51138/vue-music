@@ -1,0 +1,57 @@
+{
+  "name": "vue-music",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "core-js": "^2.6.5",
+    "lodash": "^4.17.11",
+    "sass": "^1.20.1",
+    "sass-loader": "^7.1.0",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.6",
+    "vuex": "^3.1.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
+    "babel-eslint": "^10.0.1",
+    "compression-webpack-plugin": "^2.0.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vconsole-webpack-plugin": "^1.4.2",
+    "vue-template-compiler": "^2.5.21",
+    "webpack": "^4.30.0",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-merge": "^4.2.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/strongly-recommended",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}
