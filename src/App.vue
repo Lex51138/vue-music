@@ -1,28 +1,101 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- 顶部搜索框 -->
+    <Search  
+       v-bind:inputState="inputstate"
+       v-on:onFocus="onFocus()"
+       v-on:onCancel="onCancel()"
+    />
+  <!-- content -->
+  <div class="app-body" v-show="!inputstate">
+    <mu-tabs :value="active" @change="onChange" inverse color="secondary" text-color="rgba(0, 0, 0, .54)" center full-width>
+      <mu-tab value="0">排行榜</mu-tab>
+      <mu-tab value="1">推荐</mu-tab>
+      <mu-tab value="2">我的</mu-tab>
+    </mu-tabs>
+    <div class="body-bar">
+       <!-- swiper -->
+      <swiper :options="swiperOption" ref="mySwiper"> 
+        <swiper-slide>
+          <Leaderboard />
+        </swiper-slide>
+        <swiper-slide>
+          <Recommend />
+        </swiper-slide>
+        <swiper-slide>
+          <My />
+        </swiper-slide>
+          <!-- <div class="swiper-pagination" slot="pagination"></div> -->
+      </swiper>
+    </div>
   </div>
+  <!-- 播放器 -->
+    <div class="app-play">
+    </div>
+  </div>
+  
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Search from "./components/Search"
+import Leaderboard from "./components/page/Index/Leaderboard"
+import Recommend from "./components/page/Index/Recommend"
+import My from "./components/page/Index/My"
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Search,//搜索组件
+    Leaderboard,//排行榜组件
+    Recommend,//推荐组件
+    My,//我的 组件
+    swiper,//轮播组件
+    swiperSlide//轮播组件
+  },
+  data () {
+    return {
+      active: "0",//板块切换状态
+      value1:"",//input value
+      inputstate:false,//input失去焦点 和有焦点判断是否要搜索
+      swiperOption:{
+        initialSlide:0,
+        spaceBetween: 40,
+      },
+    };
+  },
+  methods:{
+    onFocus:function (){//更改搜索框状态
+        this.inputstate=true;
+      },
+    onCancel:function(){//更改搜索框状态
+        this.inputstate=false;
+      },
+    onChange:function(val){
+        this.active=val;
+        this.swiper.slideTo(val);
+    } 
+  },
+  computed: {
+      swiper() {
+        return this.$refs.mySwiper.swiper
+      }
+  },
+  mounted(){
+    const that = this;
+    this.swiper.on("slideChange",function(){
+        that.onChange(this.activeIndex.toString())
+    })
   }
 }
-</script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+</script>
+<style lang="scss">
+ul li{
+  list-style: none;
 }
+body{
+  background-color:#EDEDED!important;
+}
+
 </style>
