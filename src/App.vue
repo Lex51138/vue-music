@@ -25,22 +25,37 @@
         <swiper-slide>
           <My />
         </swiper-slide>
-          <!-- <div class="swiper-pagination" slot="pagination"></div> -->
       </swiper>
     </div>
   </div>
   <!-- 播放器 -->
     <div class="app-play">
+      <Play 
+        v-on:onPlay="onPlay"
+        v-on:onisPlay="onisPlay"
+        v-bind:isPlay="isPlay"
+      />
     </div>
+  <!-- 播放音乐详情 -->
+    <transition name="playDe">
+        <playDetails 
+        v-on:onPlay="onPlay"
+        v-bind:isPlay="isPlay"
+        v-on:onisPlay="onisPlay"
+        v-if="playD"
+        />
+    </transition>
   </div>
-  
+
 </template>
 
 <script>
 import Search from "./components/Search"
 import Leaderboard from "./components/page/Index/Leaderboard"
 import Recommend from "./components/page/Index/Recommend"
+import Play from "./components/Play"
 import My from "./components/page/Index/My"
+import playDetails from './components/playDetails'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 export default {
@@ -51,7 +66,9 @@ export default {
     Recommend,//推荐组件
     My,//我的 组件
     swiper,//轮播组件
-    swiperSlide//轮播组件
+    swiperSlide,//轮播组件
+    Play,//底部播放组件
+    playDetails,//播放详情组件
   },
   data () {
     return {
@@ -62,6 +79,8 @@ export default {
         initialSlide:0,
         spaceBetween: 40,
       },
+      playD:false,
+      isPlay:false
     };
   },
   methods:{
@@ -71,15 +90,21 @@ export default {
     onCancel:function(){//更改搜索框状态
         this.inputstate=false;
       },
-    onChange:function(val){
+    onChange:function(val){//滑动轮播更改mu导航的标签
         this.active=val;
         this.swiper.slideTo(val);
-    } 
+    },
+    onPlay:function(){
+        this.playD=!this.playD;
+    },
+    onisPlay:function(){
+        this.isPlay=!this.isPlay;
+    }
   },
   computed: {
       swiper() {
         return this.$refs.mySwiper.swiper
-      }
+      },
   },
   mounted(){
     const that = this;
@@ -97,5 +122,15 @@ ul li{
 body{
   background-color:#EDEDED!important;
 }
+.playDe-enter-active {
+  transition: all 0.3s ease;
+}
 
+.playDe-leave-active {
+  transition: all 0.3s ease-out;
+}
+.playDe-enter, .playDe-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  transform: translateY(150px);
+  opacity: 0;
+}
 </style>

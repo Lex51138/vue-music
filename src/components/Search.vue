@@ -20,11 +20,15 @@
   <!-- 下拉条 -->
   <div v-if="inputState" class="down-box">
     <div class="history-box">
-      <div></div>
+        <mu-chip class="demo-chip" v-for="(item,index) in historyArr" :key="index">
+          {{item}}
+        </mu-chip>
     </div>
-    <ul>
+    <div class="rank-box">
+      <ul>
       <li></li>
     </ul>
+    </div>
   </div>
 </div>
 </template>
@@ -51,12 +55,14 @@ export default {
   },
   computed:{
     historyArr:function (){
-      return  localStorage.getItem('history').split(',');
+       if(localStorage.getItem('history')!=null){
+         return localStorage.getItem('history').split(',');
+       }
     }
   }
 }
-</script>
-<style lang="scss">
+</script> 
+<style lang="scss" scoped>
 .search{
     display: flex;
     background: #fafafa;
@@ -101,5 +107,24 @@ export default {
         opacity: 0
     }
 }
+   .down-box{
+      background-color: #fafafa;
+      .history-box{
+        .mu-chip{
+          margin-left: 10px;
+          margin-top: -1px;
+          margin-bottom: 13px;
+        }
+      }
+      .rank-box{
+        ul{
+
+        }
+        li
+        {
+
+        }
+      }
+    }
 
 </style>
