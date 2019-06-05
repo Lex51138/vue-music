@@ -1,12 +1,12 @@
 <template>
     <div class="Lb">
        <div class="Lb-box">
-         <div class="Lb-item" v-for="(item,index) in items" :key="index">
+      <router-link to="/sort" v-for="(item,index) in items" :key="index">
+         <div class="Lb-item">
             <div class="item-left">
                <img :src="item.img" alt="">
                <span class="left-hot">{{item.hot}}万</span>
             </div>
-            
             <div class="item-right">
                <p class="right-title">{{item.title}}</p>
                   <p v-for="(data,key) in item.list" :key="key">
@@ -15,10 +15,13 @@
                   </p>
             </div>
          </div>
+      </router-link>
        </div>
     </div>
 </template>
 <script>
+import {mapState,mapMutations} from 'vuex';
+import api from '../../api/api'
 export default {
    name:'Leaderboard',
    data() {
@@ -57,12 +60,25 @@ export default {
          ]
       }
    },
-   activated() {
+   methods:{
+      ...mapState({
+         datalist : state=>state.muscilist.rankList,
+      }),
+      ...mapMutations([
+         'updateRank'
+      ])
+   },
+   created() {
+      let that = this;
+      api.rank().then(result=>{
+         that.updateRank(result);
+      })
+      
    }
 }
 </script>
 
-\<style lang="scss" scoped>
+<style lang="scss" scoped>
 .Lb{
    margin-top:20px;
    
@@ -95,6 +111,7 @@ export default {
          .item-right{
             margin-left:-30px;
             width:68%;
+            color:black;
             .right-title{
                font-size: 16px;
                margin-top: 6px;

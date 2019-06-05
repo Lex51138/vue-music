@@ -1,19 +1,26 @@
 <template>
     <div class="Play">
         <div  class="play-box">
-            <div @click="$emit('onPlay')" class="music-img">
+            <div @click="updatePlayD" class="music-img">
                 <img :src="nowPlay.imgSrc" alt="">
             </div>
-            <div @click="$emit('onPlay')" class="music-title"><span>{{nowPlay.Name}}</span></div>
-            <div class="player-box" @click="$emit('onisPlay')">
-                <img v-if="!isPlay" src="../assets/play.png" alt="">
-                <img v-if="isPlay" src="../assets/stop.png" alt="">
+            <div @click="updatePlayD" class="music-title"><span>{{nowPlay.Name}}</span></div>
+            <div class="player-box" @click="updatePause">
+                <img v-if="nowPlay.isPause" src="../assets/play.png" alt="">
+                <img v-if="!nowPlay.isPause" src="../assets/stop.png" alt="">
             </div>
         </div>
+          <!-- 播放音乐详情 -->
+    <transition name="playDe">
+        <playDetails 
+        v-show="PlayD"
+        />
+    </transition>
     </div>
 </template>
 <script>
-import {mapState} from 'vuex';
+import {mapState,mapMutations} from 'vuex';
+import playDetails from '../components/playDetails'
 export default {
    name:'Play',
    data() {
@@ -22,15 +29,18 @@ export default {
    },
    computed:{
     ...mapState({
-        nowPlay:state=>state.muscilist
+        nowPlay:state=>state.muscilist,
+        PlayD:state=>state.globalState.isPlayD
     }),
-    
    },
-   props:['isPlay'], 
    methods:{
+    ...mapMutations([
+        'updatePause',
+        'updatePlayD'
+    ])
    },
-   activated() {
-
+   components:{
+       playDetails
    }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div class="PlayD-box">
-        <div class="PlayD-header" @click="$emit('onPlay')">
+        <div class="PlayD-header" @click="updatePlayD">
             <div class="PlayD-down">
                 <img src="../assets/down.png" alt="">
             </div>
@@ -52,7 +52,7 @@
     </div>
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState,mapMutations } from 'vuex';
 import playList from '../components/ChildrenPage/playList'
 export default {
    data() {
@@ -72,7 +72,10 @@ export default {
    methods:{
        onList:function(){
            this.isList=!this.isList;
-       }
+       },
+       ...mapMutations([
+        'updatePlayD'
+    ])
    }
 }
 </script>
