@@ -8,7 +8,6 @@ import store from './vuex/store'
 Vue.use(MuseUI);
 
 Vue.config.productionTip = false
-
 new Vue({
   router,
   store,

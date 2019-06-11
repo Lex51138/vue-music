@@ -20,29 +20,68 @@
   <!-- 下拉条 -->
   <div v-if="inputState" class="down-box">
     <div class="history-box">
-        <mu-chip class="demo-chip" v-for="(item,index) in historyArr" :key="index">
+        <mu-chip class="demo-chip" v-for="(item,index) in historyArr" :key="index" @click="historyClick">
           {{item}}
         </mu-chip>
     </div>
-    <div class="rank-box">
-      <ul>
-      <li></li>
-    </ul>
+  </div>
+  <!-- 搜索结果 -->
+  <div class="result-box" v-if="inputState">
+    <div class="result-dq">
+        <p class="dq-title"><img src="../assets/dq.png" alt="">单曲</p>
+        <div v-for="(item,key) in seList" :key="key">
+          <item v-bind:data="item" v-on:onDown="downOnclick(item)"/>    
+        </div>
     </div>
   </div>
-</div>
+  <!-- 底部菜单-->
+    <transition name='downMenu'>
+      <DownMenu 
+      v-show="isDown" 
+      v-bind:isDown="isDown" 
+      v-on:onDown="()=>{isDown=false}"
+      v-bind:nowItem="nowItem"
+      v-bind:itemArr="{name:'添加至播放列表',click:()=>{}}"
+      />
+    </transition>
+  </div>
 </template>
 <script>
-
+import api from '../components/api/api'
+import item from '../components/multi/item'
+import DownMenu from '../components/multi/DownMenu'
 export default {
   name: 'Search',
   props:['inputState'],
+  components:{
+    item,//item组件
+    DownMenu//下拉弹窗组件
+  },
+  data(){
+    return{
+      seList:[],
+      isResult:false,
+      isDown:false,
+      nowItem:[],
+    }
+  },
   methods:{
+    downOnclick:function(item){
+        this.nowItem=item;
+        this.isDown=true;
+    },
     inputOnclick : function(){
+        let that = this;
         const inputVal=this.$refs.searchInput.value;
+        let data = {
+          keyword:inputVal,
+          type:'song'
+        }
+        api.search(data).then(result=>{
+          that.seList=result.data.data.list;
+        })
         //做了个null判断
         let result = localStorage.getItem('history')===null?inputVal:localStorage.getItem('history')+','+inputVal;
-        
         if(localStorage.getItem('history')===null){
             localStorage.setItem('history',result);
         }
@@ -50,7 +89,11 @@ export default {
             //重复搜索不添加至缓存
             localStorage.getItem('history').split(',').indexOf(inputVal)==-1?localStorage.setItem('history',result):"";
         }
-
+        this.isResult=true;
+    },
+    historyClick: function(e){
+        this.$refs.searchInput.value=e.target.innerText;
+        this.inputOnclick();
     }
   },
   computed:{
@@ -114,17 +157,31 @@ export default {
           margin-left: 10px;
           margin-top: -1px;
           margin-bottom: 13px;
-        }
-      }
-      .rank-box{
-        ul{
-
-        }
-        li
-        {
-
+          position: relative;
+          top: 6px;
         }
       }
     }
-
+    .result-box{
+      .result-dq{
+        margin-top: -8px;
+        .dq-title{
+          font-size:16px;
+          img{
+            margin-right: 15px;
+            margin-left:10px;
+            width:23px;
+            position: relative;
+            top:6px;
+          }
+        }
+      }
+    }
+   //移入移出动画
+    .downMenu-enter-active, .downMenu-leave-active {
+        transition:  .3s;
+    }
+    .downMenu-enter,.downMenu-leave-to /* .fade-leave-active below version 2.1.8 */ {
+          opacity: 0
+    }
 </style>

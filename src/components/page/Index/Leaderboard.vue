@@ -60,10 +60,12 @@ export default {
          ]
       }
    },
-   methods:{
-      ...mapState({
+   computed:{
+       ...mapState({
          datalist : state=>state.muscilist.rankList,
       }),
+   },
+   methods:{
       ...mapMutations([
          'updateRank'
       ])
@@ -71,9 +73,8 @@ export default {
    created() {
       let that = this;
       api.rank().then(result=>{
-         that.updateRank(result);
+         that.updateRank(result.data);
       })
-      
    }
 }
 </script>
@@ -112,7 +113,7 @@ export default {
             margin-left:-30px;
             width:68%;
             color:black;
-            .right-title{
+         .right-title{
                font-size: 16px;
                margin-top: 6px;
             }  

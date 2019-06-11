@@ -11,12 +11,12 @@
       <div class="hot-music">
          <p class="hot-title">热门歌单</p>
          <div class="hot-music-box">
-            <div class='music-item' v-for='(item,index) in hotmusic' :key="index">
-            <img :src="item.img" alt="">
-            <span>{{item.playtotal}}万</span>
+            <div class='music-item' v-for='(item,index) in hotlist' :key="index">
+            <img :src="item.imgurl" alt="">
+            <span>{{item.listennum}}万</span>
             <div class="title-box">
-               <p class="title">{{item.title}}</p>
-               <p class="username">{{item.username}}</p>
+               <p class="title">{{item.dissname}}</p>
+               <p class="username">{{item.creator.name}}</p>
             </div>
             </div>
          </div>
@@ -25,11 +25,29 @@
 </template>
 <script>
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import {mapState,mapMutations} from 'vuex'
+import api from '../../api/api'
 export default {
    name:'Recommend',
    components:{
       swiper,
       swiperSlide
+   },
+   created() {
+      let that = this;
+      api.hot().then(result=>{
+         that.updateHot(result.data.data.list);
+      })
+   },
+   computed:{
+      ...mapState({
+         hotlist : state=>state.muscilist.hotlist,
+      }),
+   },
+   methods:{ 
+      ...mapMutations([
+         'updateHot'
+      ])
    },
    data() {
       return {

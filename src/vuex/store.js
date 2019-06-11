@@ -27,7 +27,8 @@ const muscilist = {
     imgSrc:'http://img0.pconline.com.cn/pconline/1608/19/8274060_0_thumb.jpg',//正在播放的歌封面
     Name:'Music',//正在播放歌曲名字
     songer:'Musicsonger',//歌手
-    rankList:[]
+    rankList:[],//排行榜歌单
+    hotlist:[]//热门歌单
   },
   mutations:{
     updatePause:state=>{
@@ -35,6 +36,9 @@ const muscilist = {
     },
     updateRank:(state,data)=>{
       return state.rankList = data;
+    },
+    updateHot:(state,data)=>{
+      return state.hotlist = data;
     }
   }
 }
