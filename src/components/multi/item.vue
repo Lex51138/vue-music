@@ -1,8 +1,8 @@
 <template>
     <div class="music-item">
         <!-- <div class="item-left"> -->
-            <span class="item-name">{{data.songname}}</span>
-            <span class="item-singer">-{{data.singer[0].name}}</span>
+            <span class="item-name" @click="playMusic(data)">{{data.songname}}</span>
+            <span class="item-singer" @click="playMusic(data)">-{{data.singer[0].name}}</span>
         <!-- </div> -->
             <div class="item-right" @click="$emit('onDown')">
                 <img src="../../assets/menu1.png">
@@ -10,12 +10,29 @@
     </div>
 </template>
 <script>
+import {mapState,mapMutations} from 'vuex';
+import api from '../api/api'
 export default {
    data() {
       return {
       }
    },
    props:['data'],
+   methods:{
+       ...mapMutations(['updateMuisc']),
+       playMusic:function(data){
+           const that = this;
+           api.songUrl(data.songmid).then(result=>{
+               let resultData={
+               musicSrc:`http://ws.stream.qqmusic.qq.com/C400${data.songmid}.m4a?fromtag=0&guid=126548448&vkey=${result.data.data.items[0].vkey}`,
+               Name:data.songname,
+               songer:data.singer[0].name,
+               imgSrc:`http://imgcache.qq.com/music/photo/album_300/${data.albumid%100}/300_albumpic_${data.albumid}_0.jpg`,
+                }
+                that.updateMuisc(resultData);
+           })
+       }
+   }
 }
 </script>
 

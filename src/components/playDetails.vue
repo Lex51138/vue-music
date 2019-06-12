@@ -5,11 +5,11 @@
                 <img src="../assets/down.png" alt="">
             </div>
             <div class="PlayD-cover">
-                <img src="https://y.gtimg.cn/music/photo_new/T002R500x500M000002od0aF16hAeK.jpg" alt="">
+                <img :src='nowPlay.imgSrc' alt="">
             </div>
         </div>
         <div class="playD-lyrics-box">
-            <img class="lyrics-cover" src="https://y.gtimg.cn/music/photo_new/T002R500x500M000002od0aF16hAeK.jpg" alt="">
+            <img class="lyrics-cover" :src='nowPlay.imgSrc' alt="">
             <div class="PlayD-time-box">
                 <div class="PlayD-time-bar">
                     <div class="playD-time-line"></div>
@@ -34,8 +34,8 @@
                 </div>
                 <div class="lyrics-content">
                     <img src="../assets/on.png" alt="">
-                    <img @click="$emit('onisPlay')" style="margin-left: 1rem;" v-if="!isPlay" src="../assets/play1.png" alt="">
-                    <img @click="$emit('onisPlay')" style="margin-left: 1rem;" v-if="isPlay" src="../assets/stop1.png" alt="">
+                    <img @click="updatePause" style="margin-left: 1rem;" v-if="nowPlay.isPause" src="../assets/play1.png" alt="">
+                    <img @click="updatePause" style="margin-left: 1rem;" v-if="!nowPlay.isPause" src="../assets/stop1.png" alt="">
                     <img style="margin-left: 1rem;" src="../assets/next.png" alt="">
                 </div>
                 <div @click="onList" class="lyrics-right">
@@ -68,13 +68,13 @@ export default {
            nowPlay:state=>state.muscilist
        })
    },
-   props:['isPlay'],
    methods:{
        onList:function(){
            this.isList=!this.isList;
        },
        ...mapMutations([
-        'updatePlayD'
+        'updatePlayD',
+        'updatePause',
     ])
    }
 }
@@ -89,6 +89,7 @@ export default {
         height: 130%;
         width: 100%;
     .PlayD-header{
+        height:46.4%;
         .PlayD-down{
             position: relative;
             background-color: hsla(0,0%,100%,.8);
@@ -105,8 +106,10 @@ export default {
             }
         }
         .PlayD-cover{
+            height:100%;
             img{
                 width:100%;
+                height:94.5%;
             }
         }
     }

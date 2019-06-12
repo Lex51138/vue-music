@@ -9,9 +9,10 @@ const api = {
     },
     search:async (data)=>{
         return get(`https://v1.itooi.cn/tencent/search?keyword=${data.keyword}&type=${data.type}&pageSize=5&page=0`)
+    },
+    songUrl:async (mid)=>{
+        return get(`/api/base/fcgi-bin/fcg_music_express_mobile3.fcg?format=json205361747&platform=yqq&cid=205361747&songmid=${mid}&filename=C400${mid}.m4a&guid=126548448`)
     }
 }
-
-
 export  default api;
  

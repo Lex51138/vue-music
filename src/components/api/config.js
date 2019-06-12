@@ -18,7 +18,7 @@ const config = {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     },
     timeout: 10000,
-    responseType: 'json'
+    responseType: 'json',
 }
 export const get = (url)=>{
     return axios.get(url,config);

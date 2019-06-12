@@ -26,6 +26,7 @@ const muscilist = {
     mode:0,//播放模式 0是顺序播放 1是单曲循环 2 是随机播放
     imgSrc:'http://img0.pconline.com.cn/pconline/1608/19/8274060_0_thumb.jpg',//正在播放的歌封面
     Name:'Music',//正在播放歌曲名字
+    musicSrc:'',//音乐播放地址
     songer:'Musicsonger',//歌手
     rankList:[],//排行榜歌单
     hotlist:[]//热门歌单
@@ -39,6 +40,12 @@ const muscilist = {
     },
     updateHot:(state,data)=>{
       return state.hotlist = data;
+    },
+    updateMuisc:(state,data)=>{
+          state.imgSrc = data.imgSrc;
+          state.musicSrc = data.musicSrc;
+          state.Name=data.Name;
+          state.songer=data.songer;
     }
   }
 }

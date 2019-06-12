@@ -4,11 +4,12 @@
      <router-view>
      </router-view>
    </transition>
+   <audio ref='audio' :autoplay="!isPause" :src="musicSrc"></audio>
   </div>
 </template>
 
 <script>
-
+import { mapState } from 'vuex';
 export default {
   name: 'app',
   components: {
@@ -17,6 +18,12 @@ export default {
     return {
     };
   },
+  computed:{
+    ...mapState({
+      musicSrc:state=>state.muscilist.musicSrc,
+      isPause:state=>state.muscilist.isPause,
+    })
+  }
 }
 
 </script>
