@@ -1,12 +1,14 @@
 import axios from 'axios'
+import qs from 'qs'
 const config = {
     transformRequest: [
         function (data) {
-            let ret = '';
-            for (let it in data) {
-                ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-            }
-            return ret
+            // let ret = '';
+            // for (let it in data) {
+            //     ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+            // }
+            // return ret
+            return qs.stringify({...data});
         }
     ],
     transformResponse: [
@@ -15,7 +17,7 @@ const config = {
         }
     ],
     headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8;jsonp'
     },
     timeout: 10000,
     responseType: 'json',

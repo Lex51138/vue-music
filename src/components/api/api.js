@@ -1,8 +1,13 @@
 import {get} from './config'
+import jsonp from 'jsonp'
 
 const api = {
-    rank:async ()=>{
-       return  get('https://v1.itooi.cn/tencent/topList?id=26&pageSize=10&page=0');
+    rank:(cb)=>{
+        jsonp('/api/v8/fcg-bin/fcg_myqq_toplist.fcg?g_tk=5381&uin=0&format=jsonp&jsonpCallback=callback&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&_=1512554796112',
+        {name:'callback'},
+        (err,data)=>{
+            cb(data.data.topList);
+        });
     },
     hot:async ()=>{
         return get('https://v1.itooi.cn/tencent/songList/hot?cat=全部&pageSize=20&page=0')

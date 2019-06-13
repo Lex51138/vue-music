@@ -28,6 +28,7 @@ export default {
                Name:data.songname,
                songer:data.singer[0].name,
                imgSrc:`http://imgcache.qq.com/music/photo/album_300/${data.albumid%100}/300_albumpic_${data.albumid}_0.jpg`,
+               isPause:false,
                 }
                 that.updateMuisc(resultData);
            })

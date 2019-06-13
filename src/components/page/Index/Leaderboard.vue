@@ -1,17 +1,17 @@
 <template>
     <div class="Lb">
        <div class="Lb-box">
-      <router-link to="/sort" v-for="(item,index) in items" :key="index">
+      <router-link :to="{name:'sort',params:{id:index}}" v-for="(item,index) in datalist" :key="index">
          <div class="Lb-item">
             <div class="item-left">
-               <img :src="item.img" alt="">
-               <span class="left-hot">{{item.hot}}万</span>
+               <img :src="item.picUrl" alt="">
+               <div class="left-hot">{{Math.round((item.listenCount /10000) * 100) / 100}}万</div>
             </div>
             <div class="item-right">
-               <p class="right-title">{{item.title}}</p>
-                  <p v-for="(data,key) in item.list" :key="key">
-                     {{key}}&nbsp;{{data.name}}
-                     <span>-{{data.singer}}</span>
+               <p class="right-title">{{item.topTitle}}</p>
+                  <p v-for="(data,key) in item.songList" :key="key">
+                     {{key+1}}&nbsp;{{data.songname}}
+                     <span>-{{data.singername}}</span>
                   </p>
             </div>
          </div>
@@ -26,38 +26,6 @@ export default {
    name:'Leaderboard',
    data() {
       return {
-         items:[
-            {
-             img:"http://y.gtimg.cn/music/photo_new/T003R300x300M000000nFYcR0XVO3G.jpg",
-             hot:'1900',
-             title:'说唱榜',
-             list:[{name:'灰姑娘',singer:'陈雪凝'},{name:'灰姑娘',singer:'陈雪凝'},{name:'灰姑娘121312321',singer:'陈雪凝122323232'}]
-            },
-            {
-             img:"http://y.gtimg.cn/music/photo_new/T003R300x300M000000LZidD4WD2Jf.jpg",
-             hot:'1900',
-             title:'说唱榜',
-             list:[{name:'灰姑娘',singer:'陈雪凝'},{name:'灰姑娘',singer:'陈雪凝'}]
-            },
-            {
-             img:"http://y.gtimg.cn/music/photo_new/T003R300x300M000000LZidD4WD2Jf.jpg",
-             hot:'1900',
-             title:'说唱榜',
-             list:[{name:'灰姑娘',singer:'陈雪凝'},{name:'灰姑娘',singer:'陈雪凝'}]
-            },
-            {
-             img:"http://y.gtimg.cn/music/photo_new/T003R300x300M000000LZidD4WD2Jf.jpg",
-             hot:'1900',
-             title:'说唱榜',
-             list:[{name:'灰姑娘',singer:'陈雪凝'},{name:'灰姑娘',singer:'陈雪凝'}]
-            },
-            {
-             img:"http://y.gtimg.cn/music/photo_new/T003R300x300M000000LZidD4WD2Jf.jpg",
-             hot:'1900',
-             title:'说唱榜',
-             list:[{name:'灰姑娘',singer:'陈雪凝'},{name:'灰姑娘',singer:'陈雪凝'}]
-            }
-         ]
       }
    },
    computed:{
@@ -72,9 +40,7 @@ export default {
    },
    created() {
       let that = this;
-      api.rank().then(result=>{
-         that.updateRank(result.data);
-      })
+      api.rank(that.updateRank);
    }
 }
 </script>
@@ -103,19 +69,21 @@ export default {
             }
             .left-hot{
                position: relative;
-               right: 95px;
+               right: -4px;
                color: white;
                font-size: 10px;
-               bottom: 6px;
+               bottom: 24px;
+               max-width: 87px;
+               overflow: hidden;
             }
          }
          .item-right{
-            margin-left:-30px;
+            margin-left: 15px;
             width:68%;
             color:black;
          .right-title{
                font-size: 16px;
-               margin-top: 6px;
+               margin-top: 3px;
             }  
            p{
                overflow: hidden;

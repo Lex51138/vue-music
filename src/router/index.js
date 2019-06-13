@@ -11,12 +11,12 @@ const routes = [
         component: Index,
     },
     {
-        path: '/sort',
+        path: '/sort/:id',
         name: 'sort',
         component: Sort,
-        // meta: {
-        //     keepAlive: true,
-        // }
+        meta: {
+            keepAlive: true,
+        }
     }
 ]
 export default new Router({

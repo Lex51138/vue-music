@@ -4,7 +4,7 @@
      <router-view>
      </router-view>
    </transition>
-   <audio ref='audio' :autoplay="!isPause" :src="musicSrc"></audio>
+   <audio ref='audio' autoplay="" :src="musicSrc"></audio>
   </div>
 </template>
 
@@ -21,8 +21,14 @@ export default {
   computed:{
     ...mapState({
       musicSrc:state=>state.muscilist.musicSrc,
-      isPause:state=>state.muscilist.isPause,
-    })
+      isPause:state=>state.muscilist.isPause
+    }),
+  },
+  watch:{
+    isPause:function(){//监听isPause变化控制播放器播放暂停
+      let audio = this.$refs.audio;
+      this.isPause?audio.pause():audio.play();
+    }
   }
 }
 

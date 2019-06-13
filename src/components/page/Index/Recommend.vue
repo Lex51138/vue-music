@@ -13,7 +13,7 @@
          <div class="hot-music-box">
             <div class='music-item' v-for='(item,index) in hotlist' :key="index">
             <img :src="item.imgurl" alt="">
-            <span>{{item.listennum}}万</span>
+            <span>{{Math.round((item.listennum /10000) * 100) / 100}}万</span>
             <div class="title-box">
                <p class="title">{{item.dissname}}</p>
                <p class="username">{{item.creator.name}}</p>

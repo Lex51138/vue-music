@@ -46,6 +46,7 @@ const muscilist = {
           state.musicSrc = data.musicSrc;
           state.Name=data.Name;
           state.songer=data.songer;
+          state.isPause=data.isPause;
     }
   }
 }
