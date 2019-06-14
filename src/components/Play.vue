@@ -57,7 +57,7 @@ export default {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        z-index: 2;
+        z-index: 5;
         .music-img{
             width: 54.5px;
             height: 37.5px;

@@ -39,8 +39,7 @@ export default {
       ])
    },
    created() {
-      let that = this;
-      api.rank(that.updateRank);
+      api.rank(this.updateRank);
    }
 }
 </script>
