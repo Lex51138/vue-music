@@ -1,3 +1,4 @@
+import '@babel/polyfill'
 import Vue from 'vue'
 import App from './App.vue'
 import MuseUI from 'muse-ui';
@@ -7,7 +8,7 @@ import store from './vuex/store'
 
 Vue.use(MuseUI);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 new Vue({
   router,
   store,

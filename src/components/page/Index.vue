@@ -32,9 +32,7 @@
     <div class="app-play">
       <Play />
     </div>
-
   </div>
-
 </template>
 
 <script>

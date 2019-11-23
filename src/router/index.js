@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Sort from '../components/ChildrenPage/Sort.vue'
-import Index from '../components/page/Index.vue'
+const Sort = ()=>import('@/components/ChildrenPage/Sort.vue');//排行榜
+const Index = ()=>import('@/components/page/Index.vue');//首页
 
 Vue.use(Router);
 const routes = [
