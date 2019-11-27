@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "muse-ui": "^3.0.2",
     "node-sass": "^4.12.0",
     "sass": "^1.20.1",
