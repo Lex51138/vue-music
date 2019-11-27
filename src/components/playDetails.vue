@@ -96,8 +96,8 @@ export default {
             width: 22px;
             height: 22px;
             border-radius: 100%;
-            top: 3rem;
-            left: 1rem;
+            top: 40px;
+            left: .3rem;
             img{
                 width: 12px;
                 margin-left: 5px;

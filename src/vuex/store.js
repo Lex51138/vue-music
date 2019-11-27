@@ -38,8 +38,8 @@ const muscilist = {
     updateRank:(state,data)=>{
       return state.rankList = data;
     },
-    updateHot:(state,data)=>{
-      return state.hotlist = data;
+    updateHot:(state,data)=>{x
+      return state.hotlist =data;
     },
     updateMuisc:(state,data)=>{
           state.imgSrc = data.imgSrc;

@@ -49,7 +49,7 @@
                height: 50px;
                line-height: 39px;
                padding: 10px;
-               font-size: 1rem;
+               font-size: 16px;
                img{
                   width: 20px;
                   position: relative;
@@ -66,11 +66,11 @@
                padding-left:15px;
                p{
                   color:white;
-                  font-size:2rem;
+                  font-size:22px;
                }
                .Play-total{
-                  font-size:1rem;
-                  margin-top:-37px;
+                  font-size:16px;
+                  margin-top:-20px;
                }
             }
             .bottom-right{

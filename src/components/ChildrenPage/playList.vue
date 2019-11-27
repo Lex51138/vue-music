@@ -62,7 +62,7 @@ export default {
         background-color: #fafafa;
     .PlayList-head{
         height: 50px;
-        font-size:1rem;
+        font-size:16px;
         border-bottom: 1px solid #d0d0d0;
         line-height: 50px;
         position: fixed;
@@ -80,7 +80,7 @@ export default {
                 margin-left:0.3rem
             }
             .left-total{
-                margin-left:1rem
+                margin-left:16px
             }
         }
         .head-right{

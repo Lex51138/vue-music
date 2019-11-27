@@ -74,11 +74,11 @@ export default {
             text-align: center;
             height: 50px;
             line-height: 50px;
-            font-size:1rem;
+            font-size:18px;
         }
         .player-box{
             margin-top:7px;
-            margin-right: 1rem;
+            margin-right: .5rem;
         }
     }
 }
