@@ -12,6 +12,10 @@
     body{
         background-color:#EDEDED!important;
     }
+    .foot{
+        width:100%;
+        height: 50px;
+    }
 </style>
 <template>
     <div id="App">
@@ -19,7 +23,8 @@
             <router-view>
             </router-view>
         </transition>
-        <div class=""></div>
+<!--        防止脱离文档流-->
+        <div class="foot"></div>
         <audio ref='audio' autoplay="" :src="musicSrc"></audio>
     </div>
 </template>
